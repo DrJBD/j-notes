@@ -1,0 +1,92 @@
+# j-notes format specification
+# Status: draft -- no open questions remain as of the last resolution
+# pass. See resolved_questions at the bottom for how each closed.
+
+format:
+  name: j-notes
+  version: "0.9.1"
+  license: AGPL-3.0
+
+input:
+  extension: ".j"
+  description: >
+    Free-hand, AI-readable notes written by Judah. Not required to be
+    valid CommonMark, YAML, or any other spec -- .j is unconstrained
+    source.
+  ambiguity_resolution:
+    promise: >
+      Any ambiguity the AI cannot resolve on its own gets asked to
+      Judah directly, rather than guessed at silently and passed
+      through as if settled.
+    decision_authority: Judah   # The AI never invents the resolution!
+
+pipeline:
+  intermediate:
+    extension: ".jmd"
+    description: >
+      A working file both the AI and Judah can view and edit directly
+      -- the nudging stage between raw .j and the final, CommonMark-
+      clean .md. Carries "--" sections openly; not required to be
+      CommonMark-safe on its own, since it's still a working file, not
+      the delivered output.
+  final:
+    extension: ".md"
+    description: >
+      Must be valid, perfectly-parsable CommonMark. Any ordinary
+      Markdown renderer has to render it correctly, with nothing
+      visible left over from the conversion process.
+
+meta_keyword:
+  marker: "--"
+  meaning: >
+    Marks a meta-information section inside a .j or .jmd source file.
+    Only meaningful there -- .j/.jmd aren't constrained by CommonMark,
+    so the marker carries no rendering risk upstream of the final .md.
+  syntax: >
+    Line-scoped, not block-scoped. A "--" section runs from the marker
+    to either a second "--" later on the same line (closing it early;
+    ordinary content resumes right after) or the end of the line if no
+    second "--" appears. Never spans multiple lines -- no BEGIN/END
+    pairing the way .i's CONTEXT block uses.
+  epistemic_states:            # three states on purpose, not a binary
+    - known_by_judah           # Judah has stated the answer directly
+    - ai_guess                 # the AI has a candidate answer, unconfirmed
+    - undecided                # no answer yet, from either side
+  output_encoding: >
+    Whatever sits inside a "--" section is passed through unmodified
+    as raw HTML (including HTML comments) once it reaches the final
+    .md. CommonMark already parses raw HTML blocks natively -- a
+    browser or renderer hides an HTML comment on its own -- so j-notes
+    doesn't need a custom escaping scheme. The "HTML tag problem" is
+    left to CommonMark to handle, not solved twice.
+
+privacy_boundary:
+  statement: >
+    j-notes is a public, AGPL-licensed tool and must never embed,
+    reference, or otherwise leak Judah's private logic system's
+    content or specific vocabulary.
+  consequence: >
+    j-notes may depend on whatever generic tooling a j-notes user
+    exposes.
+
+open_questions: []
+
+resolved_questions:
+  - question: Does the output file get named .md or .jmd?
+    resolution: >
+      Both -- not an either/or. .jmd is a real pipeline stage now: an
+      editable intermediate both Judah and the AI work in. .md is the
+      final, delivered, CommonMark-clean output. See pipeline, above.
+  - question: How does a "--" meta-information section get encoded on output?
+    resolution: >
+      Passed through as raw HTML, unmodified -- CommonMark already
+      parses raw HTML blocks (including comments) natively, so no
+      custom escaping is needed. See meta_keyword.output_encoding.
+  - question: What does ijk-compilers concretely expose to j-notes?
+    resolution: >
+      Moot -- the hard dependency was removed (see privacy_boundary);
+      nothing left to specify.
+  - question: Exact "--" section delimiter syntax?
+    resolution: >
+      Line-scoped: runs to a second "--" on the same line, or to
+      end-of-line if none appears. See meta_keyword.syntax.
