@@ -1,10 +1,8 @@
 # j-notes format specification
-# Status: draft -- no open questions remain as of the last resolution
-# pass. See resolved_questions at the bottom for how each closed.
 
 format:
   name: j-notes
-  version: "0.9.1"
+  version: "1.0.1"
   license: AGPL-3.0
 
 input:
@@ -46,8 +44,7 @@ meta_keyword:
     Line-scoped, not block-scoped. A "--" section runs from the marker
     to either a second "--" later on the same line (closing it early;
     ordinary content resumes right after) or the end of the line if no
-    second "--" appears. Never spans multiple lines -- no BEGIN/END
-    pairing the way .i's CONTEXT block uses.
+    second "--" appears. Never spans multiple lines.
   epistemic_states:            # three states on purpose, not a binary
     - known_by_judah           # Judah has stated the answer directly
     - ai_guess                 # the AI has a candidate answer, unconfirmed
@@ -63,29 +60,22 @@ meta_keyword:
 privacy_boundary:
   statement: >
     j-notes is a public, AGPL-licensed tool and must never embed,
-    reference, or otherwise leak Judah's private logic system's
-    content or specific vocabulary.
+    reference, or otherwise leak j-notes specific vocabulary.
   consequence: >
     j-notes may depend on whatever generic tooling a j-notes user
-    exposes.
-
-open_questions: []
+    uses.
 
 resolved_questions:
   - question: Does the output file get named .md or .jmd?
     resolution: >
       Both -- not an either/or. .jmd is a real pipeline stage now: an
       editable intermediate both Judah and the AI work in. .md is the
-      final, delivered, CommonMark-clean output. See pipeline, above.
+      final, delivered, CommonMark-clean output.
   - question: How does a "--" meta-information section get encoded on output?
     resolution: >
       Passed through as raw HTML, unmodified -- CommonMark already
       parses raw HTML blocks (including comments) natively, so no
       custom escaping is needed. See meta_keyword.output_encoding.
-  - question: What does ijk-compilers concretely expose to j-notes?
-    resolution: >
-      Moot -- the hard dependency was removed (see privacy_boundary);
-      nothing left to specify.
   - question: Exact "--" section delimiter syntax?
     resolution: >
       Line-scoped: runs to a second "--" on the same line, or to
