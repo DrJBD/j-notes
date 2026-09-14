@@ -21,7 +21,7 @@ This is **not** a K compiler and does not target `ktye/i`.
 
 The `.j`/`.jmd`/`.md` stage shape is settled (see`spec.yaml`).
 The `.jmd` metadata format's exact contents beyond the
-`--` meta-keyword is explictly not specified.
+`—`/`--` meta-keyword is explictly not specified.
 
 ## Relationship to other repos
 
