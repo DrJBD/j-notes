@@ -86,6 +86,17 @@ terminator_ambiguity:
     A period's function is intentionally unclear where it appears in
     marked content -- not a parsing defect to resolve, a genuine
     three-way ambiguity to preserve.
+  rationale: >
+    Judah's own framing, 2026-09-14: "--. is the secret to
+    self-documenting code." -- is already real comment syntax in
+    several languages (SQL, Lua, Haskell, VHDL, Ada, AppleScript); a
+    lone "." refuses to commit to ending, continuing, or hiding a
+    thought. A comment that's just "--." never asserts a specific
+    reason the code around it could later falsify -- it flags that
+    something is there without claiming to explain it, which stays
+    true regardless of how the code changes later. More honest than
+    most comments, which go stale the moment their explanation stops
+    matching the code they're attached to.
   readings:                    # three, not a binary, same shape as
                                 # meta_keyword.epistemic_states
     - ending                   # ordinary sentence terminator
