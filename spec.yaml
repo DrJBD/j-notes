@@ -134,6 +134,30 @@ terminator_ambiguity:
     yet known, hiding means known but deliberately withheld, which is
     a different thing entirely.
 
+verifiable_equality:
+  symbol: "=="
+  meaning: >
+    Not the same claim as "=". "=" is a bare assertion -- stated,
+    taken as given, only ever has room for true. "--" is a proposition
+    -- a claim requiring a person's confirmation, resolved through
+    Judah (see meta_keyword.epistemic_states). "==" is a third kind of
+    claim: checkable, resolved by verification rather than by
+    declaration or by asking anyone -- true or false because it was
+    actually tested against the spec's own rules, not because it was
+    stated or confirmed.
+  worked_example: >
+    "X--D == XD" -- checkable directly against meta_keyword's own
+    output_encoding rule (marked content passed through unmodified,
+    nothing visible left of the marker). Source differs (one has a
+    live marker embedded, one doesn't); rendered output is identical.
+    The claim isn't asserted or confirmed, it's verified by tracing
+    the actual pipeline behavior.
+  distinct_from: >
+    "=" needs nothing beyond being said. "--" needs a person. "=="
+    needs a process to run and an actual result to check against --
+    three different sources of truth-status, not three strengths of
+    the same one.
+
 privacy_boundary:
   statement: >
     j-notes is a public, AGPL-licensed tool and must never embed,
