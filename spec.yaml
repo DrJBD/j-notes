@@ -80,6 +80,49 @@ meta_keyword:
       input.ambiguity_resolution.promise above -- ask Judah directly,
       don't guess silently and pass it through as if it were settled.
 
+terminator_ambiguity:
+  symbol: "."
+  meaning: >
+    A period's function is intentionally unclear where it appears in
+    marked content -- not a parsing defect to resolve, a genuine
+    three-way ambiguity to preserve.
+  readings:                    # three, not a binary, same shape as
+                                # meta_keyword.epistemic_states
+    - ending                   # ordinary sentence terminator
+    - continuing                # a held pause, not a full stop -- the
+                                 # thought keeps going past it
+    - hiding                    # marks where something is deliberately
+                                 # not stated, rather than that nothing
+                                 # more was there to say
+  scope: >
+    Confirmed 2026-09-14 -- only inside or immediately after a marked
+    ("--"/"—") section. Ordinary prose periods elsewhere in a .j/.jmd
+    file are unaffected; this does not touch every sentence boundary
+    in the file, only ones already flagged as meta-information.
+  applies_to_runs: >
+    Confirmed 2026-09-14 -- not limited to exactly one period. A run of
+    one or more consecutive periods immediately in or after a marker
+    all fall under the same three-way ambiguity: one period, two, or a
+    conventional ellipsis (three) are all valid instances, not just
+    the single-character case.
+  quoted_marker_case: >
+    "--" is real, common comment syntax in several languages (SQL,
+    Lua, Haskell, VHDL, Ada, AppleScript). The example `"--".` shows
+    "--" written as a quoted string literal -- the marker appearing as
+    inert data, the way it might sit inside actual source code, rather
+    than functioning as a live j-notes trigger. Confirmed valid: the
+    same ending/continuing/hiding ambiguity on the period afterward
+    still applies even when the marker itself is quoted and inactive,
+    not just when it's live.
+  distinct_from: >
+    Not the same open question as meta_keyword.epistemic_states, even
+    though both refuse a binary. epistemic_states asks whether a
+    proposition is confirmed; this asks what a period, once written,
+    was actually doing. "hiding" in particular has no equivalent
+    among the three epistemic_states -- undecided means genuinely not
+    yet known, hiding means known but deliberately withheld, which is
+    a different thing entirely.
+
 privacy_boundary:
   statement: >
     j-notes is a public, AGPL-licensed tool and must never embed,
