@@ -9,8 +9,7 @@ input:
   extension: ".j"
   description: >
     Free-hand, AI-readable notes written by Judah. Not required to be
-    valid CommonMark, YAML, or any other spec -- .j is unconstrained
-    source.
+    valid CommonMark, YAML, or any other spec.
   ambiguity_resolution:
     promise: >
       Any ambiguity the AI cannot resolve on its own gets asked to
@@ -22,11 +21,7 @@ pipeline:
   intermediate:
     extension: ".jmd"
     description: >
-      A working file both the AI and Judah can view and edit directly
-      -- the nudging stage between raw .j and the final, CommonMark-
-      clean .md. Carries "—" sections openly; not required to be
-      CommonMark-safe on its own, since it's still a working file, not
-      the delivered output.
+      A working file both the AI and Judah can view and edit directly.
   final:
     extension: ".md"
     description: >
@@ -35,32 +30,21 @@ pipeline:
       visible left over from the conversion process.
 
 meta_keyword:
-  markers: ["—", "--"]         # one trigger, two valid spellings -- see
-                                # resolved_questions: "Why two accepted
-                                # spellings for one marker?"
+  markers: ["--"]
   meaning: >
-    Marks a meta-information section inside a .j or .jmd source file.
-    Only meaningful there -- .j/.jmd aren't constrained by CommonMark,
-    so the marker carries no rendering risk upstream of the final .md.
+    Marks a meta-information section inside a .j source file.
   syntax: >
-    Line-scoped, not block-scoped. A section runs from either marker
-    spelling ("—" or "--") to either a second marker later on the same
-    line (either spelling, not required to match the opener; closing
-    it early, ordinary content resumes right after) or the end of the
-    line if no second marker appears. Never spans multiple lines.
-  epistemic_states:            # three states on purpose, not a binary
-    - known_by_judah           # Judah has stated the answer directly
-    - ai_guess                 # the AI has a candidate answer, unconfirmed
-    - undecided                # no answer yet, from either side
+    Line-scoped, not block-scoped. 
+    Never spans multiple lines.
+  epistemic_states:
+    - known_by_judah           # Judah has stated the answer directly.
+    - ai_guess                 # The AI has a candidate answer.
+    - undecided
   semantics: >
-    The marker is not "=". Equality asserts a settled value; the
-    marker stakes a proposition -- a claim about what the value is,
-    not yet the same thing as the value being confirmed. That's why a
-    marked section's answer needs three states rather than two: an
-    asserted proposition can be confirmed true (known_by_judah),
-    offered but unconfirmed (ai_guess), or not yet asserted at all
-    (undecided) -- none of which "=" has room to distinguish, since
-    "=" only ever has room for true.
+    The marker stakes a proposition.  A proposition is a claim about 
+    what the value is. An asserted proposition can be confirmed true 
+    (known_by_judah), offered but unconfirmed (ai_guess), or not yet 
+    asserted at all (undecided).
   output_encoding: >
     Whatever sits inside a marked section is passed through unmodified
     as raw HTML (including HTML comments) once it reaches the final
@@ -76,128 +60,9 @@ meta_keyword:
       take. Every lone "-" gets weighed as a possible typo of the real
       marker before being read as ordinary text (a hyphenated word, a
       minus sign, a list bullet, a numeric range). When context doesn't
-      clearly settle it either way, this falls under
-      input.ambiguity_resolution.promise above -- ask Judah directly,
-      don't guess silently and pass it through as if it were settled.
-
-terminator_ambiguity:
-  symbol: "."
-  meaning: >
-    A period's function is intentionally unclear where it appears in
-    marked content -- not a parsing defect to resolve, a genuine
-    three-way ambiguity to preserve.
-  rationale: >
-    Judah's own framing, 2026-09-14: "--. is the secret to
-    self-documenting code." -- is already real comment syntax in
-    several languages (SQL, Lua, Haskell, VHDL, Ada, AppleScript); a
-    lone "." refuses to commit to ending, continuing, or hiding a
-    thought. A comment that's just "--." never asserts a specific
-    reason the code around it could later falsify -- it flags that
-    something is there without claiming to explain it, which stays
-    true regardless of how the code changes later. More honest than
-    most comments, which go stale the moment their explanation stops
-    matching the code they're attached to.
-  readings:                    # three, not a binary, same shape as
-                                # meta_keyword.epistemic_states
-    - ending                   # ordinary sentence terminator
-    - continuing                # a held pause, not a full stop -- the
-                                 # thought keeps going past it
-    - hiding                    # marks where something is deliberately
-                                 # not stated, rather than that nothing
-                                 # more was there to say
-  scope: >
-    Confirmed 2026-09-14 -- only inside or immediately after a marked
-    ("--"/"—") section. Ordinary prose periods elsewhere in a .j/.jmd
-    file are unaffected; this does not touch every sentence boundary
-    in the file, only ones already flagged as meta-information.
-  applies_to_runs: >
-    Confirmed 2026-09-14 -- not limited to exactly one period. A run of
-    one or more consecutive periods immediately in or after a marker
-    all fall under the same three-way ambiguity: one period, two, or a
-    conventional ellipsis (three) are all valid instances, not just
-    the single-character case.
-  quoted_marker_case: >
-    "--" is real, common comment syntax in several languages (SQL,
-    Lua, Haskell, VHDL, Ada, AppleScript). The example `"--".` shows
-    "--" written as a quoted string literal -- the marker appearing as
-    inert data, the way it might sit inside actual source code, rather
-    than functioning as a live j-notes trigger. Confirmed valid: the
-    same ending/continuing/hiding ambiguity on the period afterward
-    still applies even when the marker itself is quoted and inactive,
-    not just when it's live.
-  distinct_from: >
-    Not the same open question as meta_keyword.epistemic_states, even
-    though both refuse a binary. epistemic_states asks whether a
-    proposition is confirmed; this asks what a period, once written,
-    was actually doing. "hiding" in particular has no equivalent
-    among the three epistemic_states -- undecided means genuinely not
-    yet known, hiding means known but deliberately withheld, which is
-    a different thing entirely.
-
-verifiable_equality:
-  symbol: "=="
-  meaning: >
-    Not the same claim as "=". "=" is a bare assertion -- stated,
-    taken as given, only ever has room for true. "--" is a proposition
-    -- a claim requiring a person's confirmation, resolved through
-    Judah (see meta_keyword.epistemic_states). "==" is a third kind of
-    claim: checkable, resolved by verification rather than by
-    declaration or by asking anyone -- true or false because it was
-    actually tested against the spec's own rules, not because it was
-    stated or confirmed.
-  worked_example: >
-    "X--D == XD" -- checkable directly against meta_keyword's own
-    output_encoding rule (marked content passed through unmodified,
-    nothing visible left of the marker). Source differs (one has a
-    live marker embedded, one doesn't); rendered output is identical.
-    The claim isn't asserted or confirmed, it's verified by tracing
-    the actual pipeline behavior.
-  distinct_from: >
-    "=" needs nothing beyond being said. "--" needs a person. "=="
-    needs a process to run and an actual result to check against --
-    three different sources of truth-status, not three strengths of
-    the same one.
+      clearly settle it either way, ask Judah directly.
+      Don't guess silently and pass it through as if it were settled.
 
 privacy_boundary:
   statement: >
-    j-notes is a public, AGPL-licensed tool and must never embed,
-    reference, or otherwise leak j-notes specific vocabulary.
-  consequence: >
-    j-notes may depend on whatever generic tooling a j-notes user
-    uses.
-
-resolved_questions:
-  - question: Does the output file get named .md or .jmd?
-    resolution: >
-      Both -- not an either/or. .jmd is a real pipeline stage now: an
-      editable intermediate both Judah and the AI work in. .md is the
-      final, delivered, CommonMark-clean output.
-  - question: How does a marked meta-information section get encoded on output?
-    resolution: >
-      Passed through as raw HTML, unmodified -- CommonMark already
-      parses raw HTML blocks (including comments) natively, so no
-      custom escaping is needed. See meta_keyword.output_encoding.
-  - question: Exact marker section delimiter syntax?
-    resolution: >
-      Line-scoped: runs to a second marker on the same line, or to
-      end-of-line if none appears. See meta_keyword.syntax.
-  - question: Why two accepted spellings ("—" and "--") for one marker?
-    resolution: >
-      Changed 2026-09-12, v1.0.1 -> v1.1.0 (additive, not breaking --
-      every existing "--" file still parses unchanged). Two hyphens
-      don't survive real typing conditions: autocorrect on Judah's
-      own systems reliably turns "--" into "—" as it's typed, which
-      silently broke the marker every time it fired. The first fix
-      tried was replacing "--" with "—" outright, but "—" is a
-      non-ASCII character and doesn't sit well in plain-ASCII files --
-      trading one fragility for another. Resolution: accept both.
-      Whichever one lands in the file, typed directly or produced by
-      autocorrect, is recognized as the same single trigger.
-  - question: Is a single "-" ever a marker?
-    resolution: >
-      Added 2026-09-12, v1.1.0 -> v1.2.0 (additive -- new check, no
-      change to what already parses). No -- only "--" and "—" count.
-      But a lone "-" is exactly what a dropped keystroke on either real
-      marker would produce, so it isn't ignored either: it's evaluated
-      as a possible typo before being read as ordinary text. See
-      meta_keyword.typo_check.
+    j-notes is a public, AGPL-licensed tool.
