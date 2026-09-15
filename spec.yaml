@@ -30,12 +30,16 @@ pipeline:
       visible left over from the conversion process.
 
 meta_keyword:
-  markers: ["--"]
+  markers: ["--", "—"]   # one marker, two accepted spellings
   meaning: >
     Marks a meta-information section inside a .j source file.
   syntax: >
-    Line-scoped, not block-scoped. 
+    Line-scoped, not block-scoped.
     Never spans multiple lines.
+    Either spelling triggers it. Both are accepted because autocorrect
+    reliably converts "--" into "—" as it is typed, and because "—" is
+    not ASCII and sits badly in plain-text files. Accepting both means
+    neither failure mode can silently break a marker.
   epistemic_states:
     - known_by_judah           # Judah has stated the answer directly.
     - ai_guess                 # The AI has a candidate answer.
