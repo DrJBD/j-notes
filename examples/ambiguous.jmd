@@ -1,0 +1,23 @@
+j-notes jmd/1
+source: ambiguous.j
+
+## Open questions
+
+Each line below is an ambiguity this converter refused to settle on its
+own (spec.yaml -> ambiguity_resolution: decision_authority is Judah).
+Replace [open] with one of the listed answers, then run:
+
+    python3 -m jnotes md <this file>
+
+?? q1 [open] line 4 · line-leading marker directly under a line with no sentence-ending punctuation, which is also what hard-wrapped prose looks like
+??     answers: marker | prose
+??     > -- not the same failure, and this line is prose that wrapped.
+
+## Body
+
+# Where the converter stops and asks
+
+A database that answered questions has to handle information
+-- not the same failure, and this line is prose that wrapped.
+
+-- [undecided] verdict: ?

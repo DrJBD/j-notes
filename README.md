@@ -27,6 +27,25 @@ I live in the spaces.
 Cats are domesticated.
 #DaringFireball's turn.
 
+## Usage
+
+Stdlib Python 3.11+, no dependencies.
+
+```
+python3 -m jnotes jmd   notes.j      # .j  -> .jmd   working file
+python3 -m jnotes md    notes.jmd    # .jmd -> .md   final CommonMark
+python3 -m jnotes build notes.j      # both stages at once
+```
+
+`build` and `md` exit non-zero and refuse to write a `.md` while any
+question is still open, so a guess cannot reach the final file dressed
+up as settled. Open questions live at the top of the `.jmd`; answer one
+by replacing `[open]` with one of the listed answers and re-running.
+
+```
+python3 -m unittest discover -s tests
+```
+
 ## Status
 
 The `.j`/`.jmd`/`.md` stage shape is settled. See `spec.yaml`.
