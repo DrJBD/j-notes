@@ -31,6 +31,7 @@ Cats are domesticated.
 
 The `.j`/`.jmd`/`.md` stage shape is settled. See `spec.yaml`.
 JMD beyond the `—`/`--` meta-keyword is explictly not specified.
+Our position on watermarks is in `watermark.md`.
 
 ## Relationship to other repos
 
