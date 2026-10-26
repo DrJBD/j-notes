@@ -45,9 +45,9 @@ meta_keyword:
     - ai_guess                 # The AI has a candidate answer.
     - undecided
   semantics: >
-    The marker stakes a proposition.  A proposition is a claim about 
-    what the value is. An asserted proposition can be confirmed true 
-    (known_by_judah), offered but unconfirmed (ai_guess), or not yet 
+    The marker stakes a proposition.  A proposition is a claim about
+    what the value is. An asserted proposition can be confirmed true
+    (known_by_judah), offered but unconfirmed (ai_guess), or not yet
     asserted at all (undecided).
   output_encoding: >
     Whatever sits inside a marked section is passed through unmodified
