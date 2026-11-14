@@ -36,14 +36,14 @@ Invisible watermarks exist and are getting good:
   picture was marked (Sander et al., ICLR 2025; MIT License,
   github.com/facebookresearch/watermark-anything).
 
-j-notes doesn't add one. An invisible mark is only honest if someone says
-it's there, and the visible ones already carry the record. If a vendor's
-model marks its output, the mark lives in the AI's drafts and thins out
-with every human rewrite; a `.j` that's all the human's carries none.
+j-notes doesn't add a watermark.  I don't have time for that crap. 
+An invisible mark is only honest if someone says it's there, and the 
+visible ones already carry the record. If a vendor's model marks its 
+output, the mark lives in the AI's drafts and thins out with every human rewrite. A `.j` that's all the human's carries none.
 
 ## The marks nobody meant
 
-Every model has habits: certain dashes, things in threes, a tidy closing
+Every model has habits: Certain dashes, things in threes, a tidy closing
 line. They act like a watermark though nobody pressed one in. Some humans
 share them. So don't hunt for the machine in the style. Look at the
 files.
